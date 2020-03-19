@@ -1,0 +1,4 @@
+{
+  success: true,
+  data: [{"id":"TSK-1","firstName":"Сергей","lastName":"Харди","taskStatus":"PLAN","taskPriority":"SHOULD","taskDate":null},{"id":"TSK-2","firstName":"Михаил","lastName":"Стэтхем","taskStatus":"DONE","taskPriority":"MUST","taskDate":null},{"id":"TSK-3","firstName":"Герман","lastName":"Харди","taskStatus":"IN PROGRESS","taskPriority":"MUST","taskDate":null},{"id":"TSK-4","firstName":"Михаил","lastName":"Харди","taskStatus":"DONE","taskPriority":"MUST","taskDate":null},{"id":"TSK-5","firstName":"Герман","lastName":"Иванов","taskStatus":"IN PROGRESS","taskPriority":"MUST","taskDate":null},{"id":"TSK-6","firstName":"Михаил","lastName":"Харди","taskStatus":"TESTING","taskPriority":"SHOULD","taskDate":null},{"id":"TSK-7","firstName":"Иван","lastName":"Иванов","taskStatus":"IN PROGRESS","taskPriority":"COULD","taskDate":null}]
+}

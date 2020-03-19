@@ -26,9 +26,5 @@ Ext.define('TaskBoard.view.kanban.Kanban', {
     columns: [
         { text: 'Имя',  dataIndex: 'firstName' },
         { text: 'Фамилия', dataIndex: 'lastName', flex: 1 }
-    ],
-
-    listeners: {
-        select: 'onItemSelected'
-    }
+    ]
 });

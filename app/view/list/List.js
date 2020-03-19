@@ -20,8 +20,4 @@ Ext.define('TaskBoard.view.list.List', {
         { text: 'Email', dataIndex: 'email', flex: 1 },
         { text: 'Phone', dataIndex: 'phone', flex: 1 }
     ],
-
-    listeners: {
-        select: 'onItemSelected'
-    }
 });

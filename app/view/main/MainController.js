@@ -3,13 +3,21 @@ Ext.define('TaskBoard.view.main.MainController', {
 
     alias: 'controller.main',
 
-    onItemSelected: function (sender, record) {
-        Ext.Msg.confirm('Confirm', 'Are you sure?', 'onConfirm', this);
-    },
-
-    onConfirm: function (choice) {
-        if (choice === 'yes') {
-            //
+    control: {
+        '#': {
+            afterrender: {
+                delay: 300,
+                fn: function () {
+                    try {
+                        Ext.getStore('mockDataStore').load();
+                    } catch (e) {
+                        Ext.toast({mockDataStore
+                            html: 'Ошибка при загрузке. mockDataStore не найдено!',
+                            align: 'tr'
+                        });
+                    }
+                }
+            }
         }
     }
 });

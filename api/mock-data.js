@@ -2,9 +2,8 @@
  * Возвращаем случайное число в промежутке от min до max
  * @param min
  * @param max
- * @return {number}
  */
-function random(min: number, max: number): number {
+function random(min, max) {
     return Math.floor(min + Math.random() * (max - min + 1));
 }
 
@@ -13,23 +12,20 @@ function random(min: number, max: number): number {
  * @param start
  * @param end
  * @param format
- * @return {*}
  */
 function generateRandomDate(
-    start: string | Date = new Date(0),
-    end: string | Date = new Date(),
-    format: 'string' | 'date' = 'string'
-): string | Date {
-    // `as Date` нужен для избежания ошибки typescript, т.к. тайпинга `new Date(string | Date)`
-    // не подвезли (а `new Date(string)` и `new Date(Date)` работают отлично)
-    const startDate: Date = new Date(start as Date);
-    const endDate: Date = new Date(end as Date);
+    start = new Date(0),
+    end = new Date(),
+    format = 'string') {
+
+    const startDate = new Date(start);
+    const endDate = new Date(end);
 
     if (isNaN(startDate.getDate()) || isNaN(endDate.getDate())) {
         throw new Error('Формат даты некорректен');
     }
 
-    const result: Date = new Date(random(startDate.getTime(), endDate.getTime()));
+    const result = new Date(random(startDate.getTime(), endDate.getTime()));
 
     return format === 'string' ? result.toISOString() : result;
 }
@@ -38,15 +34,17 @@ function generateRandomDate(
  * Генерация мок-данных для тестового задания
  */
 function generateTaskBoardData() {
-    const firstNames: string[] = ['Иван', 'Герман', 'Михаил', 'Сергей', 'Пётр'];
-    const lastNames: string[] = ['Иванов', 'Петров', 'Сидоров', 'Стэтхем', 'Харди'];
-    const taskStatuses: string[] = ['PLAN', 'IN PROGRESS', 'TESTING', 'DONE'];
-    const taskPriorities: string[] = ['MUST', 'SHOULD', 'COULD'];
-    const minItems: number = 5;
-    const maxItems: number = 10;
-    let idCounter: number = 0;
+    const firstNames = ['Иван', 'Герман', 'Михаил', 'Сергей', 'Пётр'];
+    const lastNames = ['Иванов', 'Петров', 'Сидоров', 'Стэтхем', 'Харди'];
+    const taskStatuses = ['PLAN', 'IN PROGRESS', 'TESTING', 'DONE'];
+    const taskPriorities = ['MUST', 'SHOULD', 'COULD'];
+    const minItems = 5;
+    const maxItems = 10;
+    let idCounter = 0;
 
-    for (let i: number = 0; i < random(minItems, maxItems); i++) {
+    let tasks = [];
+
+    for (let i = 0; i < random(minItems, maxItems); i++) {
         tasks[i] = {
             id: 'TSK-' + ++idCounter,
             firstName: firstNames[random(0, firstNames.length - 1)],
@@ -60,4 +58,4 @@ function generateTaskBoardData() {
     return tasks;
 }
 
-generateTaskBoardData();
+console.log(JSON.stringify(generateTaskBoardData()));

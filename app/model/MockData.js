@@ -85,7 +85,7 @@ Ext.define('TaskBoard.model.MockData', {
 
     proxy: {
         type: 'ajax',
-        url: 'api/mock-data.js',
+        url: 'api/mock-data',
         reader: {
             type: 'json',
             // transform: function (data) {
@@ -104,6 +104,7 @@ Ext.define('TaskBoard.model.MockData', {
             //     });
             //     return res;
             // }
-        }
+        },
+        rootProperty: 'data'
     }
 });
