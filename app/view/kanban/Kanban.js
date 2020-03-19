@@ -12,19 +12,16 @@ Ext.define('TaskBoard.view.kanban.Kanban', {
 
     viewModel: 'main',
 
-    store: {
-        // type: 'mockDataStore'
-        bind: {
-            type: '{mockDataStore}'
-        }
+    bind: {
+        store: '{mockDataStore}'
     },
 
-    // bind: {
-    //     store: '{mockDataStore}'
-    // },
-
     columns: [
-        { text: 'Имя',  dataIndex: 'firstName' },
-        { text: 'Фамилия', dataIndex: 'lastName', flex: 1 }
+        { text: '№ тикета',  dataIndex: 'id'},
+        { text: 'Имя', dataIndex: 'firstName', flex: 1 },
+        { text: 'Фамилия', dataIndex: 'lastName', flex: 1 },
+        { text: 'Статус', dataIndex: 'taskStatus', flex: 1 },
+        { text: 'Приоритет', dataIndex: 'taskPriority', flex: 1 },
+        { text: 'Дата создания', dataIndex: 'taskDate', flex: 1 }
     ]
 });

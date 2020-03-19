@@ -17,7 +17,14 @@ Ext.define('TaskBoard.view.main.MainViewModel', {
             autoLoad: false,
             pageSize: 0,
             storeId: 'mockDataStore',
-            model: 'TaskBoard.model.MockData'
+            model: 'TaskBoard.model.MockData',
+            proxy: {
+                type: 'ajax',
+                url: 'api/mock-data',
+                reader: {
+                    type: 'json'
+                },
+            }
         }
     }
 });

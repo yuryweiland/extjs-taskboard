@@ -3,7 +3,6 @@ Ext.define('TaskBoard.view.list.List', {
     xtype: 'list',
 
     requires: [
-        'TaskBoard.store.Personnel',
         'TaskBoard.view.list.ListController'
     ],
 
@@ -11,13 +10,18 @@ Ext.define('TaskBoard.view.list.List', {
 
     controller: 'list-controller',
 
-    store: {
-        type: 'personnel'
+    viewModel: 'main',
+
+    bind: {
+        store: '{mockDataStore}'
     },
 
     columns: [
-        { text: 'Name',  dataIndex: 'name' },
-        { text: 'Email', dataIndex: 'email', flex: 1 },
-        { text: 'Phone', dataIndex: 'phone', flex: 1 }
-    ],
+        { text: '№ тикета',  dataIndex: 'id'},
+        { text: 'Имя', dataIndex: 'firstName', flex: 1 },
+        { text: 'Фамилия', dataIndex: 'lastName', flex: 1 },
+        { text: 'Статус', dataIndex: 'taskStatus', flex: 1 },
+        { text: 'Приоритет', dataIndex: 'taskPriority', flex: 1 },
+        { text: 'Дата создания', dataIndex: 'taskDate', flex: 1 }
+    ]
 });
