@@ -1,15 +1,15 @@
-/**
- * This view is an example list of people.
- */
-Ext.define('TaskBoard.view.main.List', {
+Ext.define('TaskBoard.view.list.List', {
     extend: 'Ext.grid.Panel',
-    xtype: 'mainlist',
+    xtype: 'list',
 
     requires: [
-        'TaskBoard.store.Personnel'
+        'TaskBoard.store.Personnel',
+        'TaskBoard.view.list.ListController'
     ],
 
-    title: 'Personnel',
+    title: 'Список задач',
+
+    controller: 'list-controller',
 
     store: {
         type: 'personnel'

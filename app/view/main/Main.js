@@ -1,10 +1,3 @@
-/**
- * This class is the main view for the application. It is specified in app.js as the
- * "mainView" property. That setting automatically applies the "viewport"
- * plugin causing this view to become the body element (i.e., the viewport).
- *
- * TODO - Replace this content of this view to suite the needs of your application.
- */
 Ext.define('TaskBoard.view.main.Main', {
     extend: 'Ext.tab.Panel',
     xtype: 'app-main',
@@ -14,8 +7,9 @@ Ext.define('TaskBoard.view.main.Main', {
         'Ext.window.MessageBox',
 
         'TaskBoard.view.main.MainController',
-        'TaskBoard.view.main.MainModel',
-        'TaskBoard.view.main.List'
+        'TaskBoard.view.main.MainViewModel',
+        'TaskBoard.view.kanban.Kanban',
+        'TaskBoard.view.list.List'
     ],
 
     controller: 'main',
@@ -32,12 +26,10 @@ Ext.define('TaskBoard.view.main.Main', {
             align: 'stretchmax'
         },
         title: {
-            bind: {
-                text: '{name}'
-            },
+            text: 'TestCompany',
             flex: 0
         },
-        iconCls: 'fa-th-list'
+        iconCls: 'fa-circle'
     },
 
     tabBar: {
@@ -58,7 +50,7 @@ Ext.define('TaskBoard.view.main.Main', {
     },
 
     defaults: {
-        bodyPadding: 20,
+        bodyPadding: 0,
         tabConfig: {
             plugins: 'responsive',
             responsiveConfig: {
@@ -76,29 +68,16 @@ Ext.define('TaskBoard.view.main.Main', {
     },
 
     items: [{
-        title: 'Home',
-        iconCls: 'fa-home',
-        // The following grid shares a store with the classic version's grid as well!
+        title: 'Доска Kanban',
+        iconCls: 'fa-clipboard',
         items: [{
-            xtype: 'mainlist'
+            xtype: 'kanban'
         }]
     }, {
-        title: 'Users',
-        iconCls: 'fa-user',
-        bind: {
-            html: '{loremIpsum}'
-        }
-    }, {
-        title: 'Groups',
-        iconCls: 'fa-users',
-        bind: {
-            html: '{loremIpsum}'
-        }
-    }, {
-        title: 'Settings',
-        iconCls: 'fa-cog',
-        bind: {
-            html: '{loremIpsum}'
-        }
+        title: 'Список задач',
+        iconCls: 'fa-list',
+        items: [{
+            xtype: 'list'
+        }]
     }]
 });
