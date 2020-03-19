@@ -1,4 +1,4 @@
-Ext.define('TaskBoard.model.MockData', {
+Ext.define('TaskBoard.model.Task', {
 
     extend: 'Ext.data.Model',
 
@@ -16,12 +16,16 @@ Ext.define('TaskBoard.model.MockData', {
             type: 'string'
         },
         {
-            name: 'taskStatus',
+            name: 'taskTitle',
             type: 'string'
         },
         {
-            name: 'taskPriority',
-            type: 'string'
+            name: 'taskStatusId',
+            type: 'number'
+        },
+        {
+            name: 'taskPriorityId',
+            type: 'number'
         },
         {
             name: 'taskDate',

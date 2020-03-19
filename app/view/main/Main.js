@@ -4,7 +4,6 @@ Ext.define('TaskBoard.view.main.Main', {
 
     requires: [
         'Ext.plugin.Viewport',
-        'Ext.window.MessageBox',
 
         'TaskBoard.view.main.MainController',
         'TaskBoard.view.main.MainViewModel',

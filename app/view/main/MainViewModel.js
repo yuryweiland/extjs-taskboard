@@ -5,7 +5,9 @@ Ext.define('TaskBoard.view.main.MainViewModel', {
     alias: 'viewmodel.main',
 
     requires: [
-        'TaskBoard.model.MockData'
+        'TaskBoard.model.Task',
+        'TaskBoard.model.Status',
+        'TaskBoard.model.Priority'
     ],
 
     data: {
@@ -13,16 +15,45 @@ Ext.define('TaskBoard.view.main.MainViewModel', {
         statusData: []
     },
     stores: {
-        mockDataStore: {
-            autoLoad: false,
+        tasksStore: {
+            autoLoad: true,
             pageSize: 0,
-            storeId: 'mockDataStore',
-            model: 'TaskBoard.model.MockData',
+            storeId: 'tasksStore',
+            model: 'TaskBoard.model.Task',
             proxy: {
                 type: 'ajax',
-                url: 'api/mock-data',
+                url: 'api/mock-data?tasks',
                 reader: {
-                    type: 'json'
+                    type: 'json',
+                    rootProperty: 'tasks'
+                },
+            }
+        },
+        statusesStore: {
+            autoLoad: true,
+            pageSize: 0,
+            storeId: 'statusesStore',
+            model: 'TaskBoard.model.Status',
+            proxy: {
+                type: 'ajax',
+                url: 'api/mock-data?statuses',
+                reader: {
+                    type: 'json',
+                    rootProperty: 'statuses'
+                },
+            }
+        },
+        prioritiesStore: {
+            autoLoad: true,
+            pageSize: 0,
+            storeId: 'prioritiesStore',
+            model: 'TaskBoard.model.Priority',
+            proxy: {
+                type: 'ajax',
+                url: 'api/mock-data?priorities',
+                reader: {
+                    type: 'json',
+                    rootProperty: 'priorities'
                 },
             }
         }

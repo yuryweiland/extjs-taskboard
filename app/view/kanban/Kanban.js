@@ -1,5 +1,5 @@
 Ext.define('TaskBoard.view.kanban.Kanban', {
-    extend: 'Ext.grid.Panel',
+    extend: 'Ext.panel.Panel',
     xtype: 'kanban',
 
     requires: [
@@ -10,18 +10,20 @@ Ext.define('TaskBoard.view.kanban.Kanban', {
 
     controller: 'kanban-controller',
 
-    viewModel: 'main',
-
-    bind: {
-        store: '{mockDataStore}'
+    border: true,
+    scrollable: 'horizontal',
+    bodyPadding: 10,
+    layout: {
+        type: 'hbox',
+        align: 'stretch'
     },
+    height: '100%',
+    bind: {
+        myStatus: '{statusData}'
+    },
+    setMyStatus: function (data) {
+        this.fireEvent('onupdatekanbanstate', this, data);
+    }
 
-    columns: [
-        { text: '№ тикета',  dataIndex: 'id'},
-        { text: 'Имя', dataIndex: 'firstName', flex: 1 },
-        { text: 'Фамилия', dataIndex: 'lastName', flex: 1 },
-        { text: 'Статус', dataIndex: 'taskStatus', flex: 1 },
-        { text: 'Приоритет', dataIndex: 'taskPriority', flex: 1 },
-        { text: 'Дата создания', dataIndex: 'taskDate', flex: 1 }
-    ]
+
 });

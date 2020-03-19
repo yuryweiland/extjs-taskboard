@@ -3,18 +3,33 @@ Ext.define('TaskBoard.view.main.MainController', {
 
     alias: 'controller.main',
 
+    listen: {
+        store: {
+            '#statusesStore': {
+                load: function (store) {
+                        try {
+                            this.getViewModel().set('statusData', store.getRange());
+                        } catch (e) {
+                            Ext.toast({
+                                html: 'Ошибка при загрузке. statusesStore не загружается!',
+                                align: 'tr'
+                            });
+                        }
+                    }
+                }
+        }
+    },
+
     control: {
         '#': {
             afterrender: {
                 delay: 300,
                 fn: function () {
                     try {
-                        Ext.getStore('mockDataStore').load();
-                        setTimeout(() => console.log(111, Ext.getStore('mockDataStore').getRange()), 1000);
-
+                        Ext.getStore('tasksStore').load();
                     } catch (e) {
                         Ext.toast({
-                            html: 'Ошибка при загрузке. mockDataStore не найдено!',
+                            html: 'Ошибка при загрузке. tasksStore не загружается!',
                             align: 'tr'
                         });
                     }
