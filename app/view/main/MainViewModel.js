@@ -16,7 +16,7 @@ Ext.define('TaskBoard.view.main.MainViewModel', {
     },
     stores: {
         tasksStore: {
-            autoLoad: true,
+            autoLoad: false,
             pageSize: 0,
             storeId: 'tasksStore',
             model: 'TaskBoard.model.Task',

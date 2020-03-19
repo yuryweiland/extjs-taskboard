@@ -18,10 +18,12 @@ Ext.define('TaskBoard.view.kanban.KanbanController', {
             viewready: function (view) {
                 view.dragZone = new Ext.dd.DragZone(view.getEl(), {
                     getDragData: function (e) {
-                        var sourceEl = e.getTarget(view.itemSelector, 10);
+                        let sourceEl = e.getTarget(view.itemSelector, 10);
+
                         if (sourceEl) {
                             var d = sourceEl.cloneNode(true);
                             d.id = Ext.id();
+
                             return {
                                 ddel: d,
                                 sourceEl: sourceEl,
@@ -40,20 +42,22 @@ Ext.define('TaskBoard.view.kanban.KanbanController', {
                         return view.getEl();
                     },
                     onNodeDrop: function (target, dd, e, data) {
-                        var currentStateId = data.draggedRecord.get('taskStatusId'),
+                        let currentStateId = data.draggedRecord.get('taskStatusId'),
                             sourceStateId = null;
+
                         try {
                             sourceStateId = Ext.getCmp(target.getAttribute('id'))
                                 .lookupViewModel()
-                                .get('statusId');
+                                .get('taskStatusId');
                         } catch (e) {
                         }
 
                         if (sourceStateId !== null && currentStateId !== sourceStateId) {
-                            var stateData = Ext.StoreManager
+                            let stateData = Ext.StoreManager
                                 .get('statusStore')
                                 .getById(sourceStateId);
-                            data.draggedRecord.set('id', sourceStateId);
+
+                            data.draggedRecord.set('taskStatusId', sourceStateId);
                             data.draggedRecord.set(
                                 'taskStatusId',
                                 Ext.copyTo({}, stateData.getData(), 'id,sort,name'));
@@ -66,11 +70,22 @@ Ext.define('TaskBoard.view.kanban.KanbanController', {
     },
 
     'updateKanbanState': function (panel, data) {
+
+
+        console.log(panel.items);
+
         for (var i = 0, l = Ext.max([data.length, panel.items.length]); i < l; i++) {
+
+
+            console.log('updateKanbanState', panel.items.getAt(i), data[i]);
+
 
             if (panel.items.getAt(i) !== undefined && data[i] !== undefined) {
 
-                var vm = panel.items.getAt(i).getViewModel();
+                let vm = panel.items.getAt(i).getViewModel();
+
+                console.log('VM:', vm);
+
                 vm.set('title', data[i].get('title'));
                 vm.set('statusId', data[i].get('id'));
 
@@ -101,7 +116,7 @@ Ext.define('TaskBoard.view.kanban.KanbanController', {
                                         direction: 'ASC'
                                     },
                                     {
-                                        property: 'priority',
+                                        property: 'taskPriorityId',
                                         direction: 'ASC'
                                     }
                                 ]

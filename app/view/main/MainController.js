@@ -6,7 +6,7 @@ Ext.define('TaskBoard.view.main.MainController', {
     listen: {
         store: {
             '#statusesStore': {
-                load: function (store) {
+                datachanged: function (store) {
                         try {
                             this.getViewModel().set('statusData', store.getRange());
                         } catch (e) {

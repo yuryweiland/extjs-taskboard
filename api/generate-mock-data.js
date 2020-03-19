@@ -40,8 +40,8 @@ function generateRandomDate(start = new Date(0), end = new Date()) {
  * Генерация мок-данных для тестового задания
  */
 function generateTaskBoardData() {
-    const minItems = 10;
-    const maxItems = 12;
+    const minItems = 5;
+    const maxItems = 15;
 
     let tasks = [];
 
@@ -51,8 +51,8 @@ function generateTaskBoardData() {
             firstName: firstNames[random(0, firstNames.length - 1)],
             lastName: lastNames[random(0, lastNames.length - 1)],
             taskTitle: taskTitles[random(0, taskTitles.length - 1)],
-            taskStatusId: taskStatuses.indexOf(random(0, taskStatuses.length - 1)) + 2,
-            taskPriorityId: taskPriorities.indexOf(random(0, taskPriorities.length - 1)) + 2,
+            taskStatusId: random(1, 4),
+            taskPriorityId: random(1, 3),
             taskDate: generateRandomDate()
         };
     }
