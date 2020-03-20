@@ -1,3 +1,6 @@
+/**
+ * Модель таска (задачи на канбан-доске)
+ */
 Ext.define('TaskBoard.model.Task', {
 
     extend: 'Ext.data.Model',
@@ -29,7 +32,7 @@ Ext.define('TaskBoard.model.Task', {
         },
         {
             name: 'taskDate',
-            type: 'date',
+            type: 'string',
             dateFormat: 'Y-m-d'
         }
     ]

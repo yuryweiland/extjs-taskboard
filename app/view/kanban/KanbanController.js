@@ -4,11 +4,8 @@ Ext.define('TaskBoard.view.kanban.KanbanController', {
     alias: 'controller.kanban-controller',
 
     requires: [
-        'TaskBoard.view.kanban.KanbanGrid',
         'TaskBoard.view.kanban.KanbanDataView'
     ],
-
-    mixins: ['TaskBoard.mixins.StatusRender'],
 
     control: {
         '#': {
@@ -16,6 +13,8 @@ Ext.define('TaskBoard.view.kanban.KanbanController', {
         },
         'data-view-kanban dataview': {
             viewready: function (view) {
+
+                // Объявляем dragZone, чтобы был активен drag'n'drop
                 view.dragZone = new Ext.dd.DragZone(view.getEl(), {
                     getDragData: function (e) {
                         let sourceEl = e.getTarget(view.itemSelector, 10);
@@ -42,26 +41,20 @@ Ext.define('TaskBoard.view.kanban.KanbanController', {
                         return view.getEl();
                     },
                     onNodeDrop: function (target, dd, e, data) {
-                        console.log('onNodeDrop', data.draggedRecord);
-                        
                         const elementStatusId = Ext.getCmp(target.getAttribute('id')).lookupViewModel().get('statusId');
+
+                        // Текущий taskStatusId
                         let currentTaskStatusId = data.draggedRecord.get('taskStatusId');
+
+                        // Обновлённый taskStatusId (берем статус колонки,
+                        // в которой произошло событие drop)
                         let changedTaskStatusId = elementStatusId ? elementStatusId : null;
 
-                        console.log('changedTaskStatusId', changedTaskStatusId);
-                            
+                        // Если поменялся статус таска
                         if (changedTaskStatusId !== null && currentTaskStatusId !== changedTaskStatusId) {
-
-                            let statusData = Ext.StoreManager
-                                .get('statusesStore')
-                                .getById(changedTaskStatusId);
 
                             // Устанавливаем новый taskStatusId для элемента
                             data.draggedRecord.set('taskStatusId', changedTaskStatusId);
-
-                            data.draggedRecord.set(
-                                'taskStatusId',
-                                Ext.copyTo({}, statusData.getData(), 'id,title'));
 
                             data.draggedRecord.commit();
                         }
@@ -72,14 +65,10 @@ Ext.define('TaskBoard.view.kanban.KanbanController', {
     },
 
     'updateKanbanState': function (panel, data) {
-        console.log(panel.items);
-
+        // Обновление канбан-панели - бегаем циклом по всем элементам (таскам)
         for (var i = 0, l = Ext.max([data.length, panel.items.length]); i < l; i++) {
 
-            console.log('updateKanbanState', panel.items.getAt(i), data[i]);
-
             if (panel.items.getAt(i) !== undefined && data[i] !== undefined) {
-
                 let vm = panel.items.getAt(i).getViewModel();
 
                 vm.set('title', data[i].get('title'));
@@ -87,6 +76,8 @@ Ext.define('TaskBoard.view.kanban.KanbanController', {
 
             } else if (panel.items.getAt(i) === undefined && data[i] !== undefined) {
 
+                // Добавляем панель канбан-доски,
+                // и устанавливаем filteredTaskStore и его фильтрацию
                 panel.add({
                     xtype: 'data-view-kanban',
                     viewModel: {
@@ -102,17 +93,18 @@ Ext.define('TaskBoard.view.kanban.KanbanController', {
                                     operator: '=',
                                     value: '{statusId}'
                                 },
+                                remoteSort: false,
                                 sorters: [
                                     {
-                                        property: 'firstName',
-                                        direction: 'ASC'
+                                        property: 'taskPriorityId',
+                                        direction: 'DESC'
                                     },
                                     {
                                         property: 'lastName',
                                         direction: 'ASC'
                                     },
                                     {
-                                        property: 'taskPriorityId',
+                                        property: 'firstName',
                                         direction: 'ASC'
                                     }
                                 ]
@@ -125,6 +117,8 @@ Ext.define('TaskBoard.view.kanban.KanbanController', {
                 });
 
             } else if (panel.items.getAt(i) !== undefined) {
+
+                // Удаляем элемент из колонки канбан-доски
                 panel.remove(panel.items.getAt(i), true);
             }
         }

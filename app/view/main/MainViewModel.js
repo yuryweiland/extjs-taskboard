@@ -27,7 +27,12 @@ Ext.define('TaskBoard.view.main.MainViewModel', {
                     type: 'json',
                     rootProperty: 'tasks'
                 },
-            }
+            },
+            remoteSort: false,
+            sorters: [{
+                property: 'taskPriorityId',
+                direction: 'DESC'
+            }]
         },
         statusesStore: {
             autoLoad: true,
@@ -41,7 +46,12 @@ Ext.define('TaskBoard.view.main.MainViewModel', {
                     type: 'json',
                     rootProperty: 'statuses'
                 },
-            }
+            },
+            remoteSort: false,
+            sorters: [{
+                property: 'id',
+                direction: 'ASC'
+            }]
         },
         prioritiesStore: {
             autoLoad: true,

@@ -22,9 +22,9 @@ Ext.define('TaskBoard.view.kanban.KanbanDataView', {
         scrollable: 'vertical',
         tpl: new Ext.XTemplate(
             '<tpl for=".">',
-            '<div style="padding-left:16px; box-shadow:10px 0 0 red inset;" class="task-item">',
+            '<div style="padding-left:16px;" class="task-item priority-{taskPriorityId}">',
             '<h3>{id}: {taskTitle}</h3>',
-            '<div class="x-title-text-default x-title-item">{firstName} {lastName}</div>',
+            '<div class="x-title-text-default x-title-item"><div>{firstName} {lastName}</div><div>{taskDate}</div></div>',
             '</div>',
             '</tpl>'),
         emptyText: new Ext.XTemplate(

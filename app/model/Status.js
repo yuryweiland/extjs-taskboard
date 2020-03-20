@@ -1,3 +1,7 @@
+/**
+ * Модель Статуса задачи на канбан-доски
+ * Необходим для генерации колонок самой доски
+ */
 Ext.define('TaskBoard.model.Status', {
 
     extend: 'Ext.data.Model',

@@ -85,3 +85,36 @@
 * {
     user-select: none;
 }
+
+div.task-item {
+
+    margin: 3px 6px;
+    border: 1px #ccc solid;
+
+    h3 {
+        margin: 8px 0;
+    }
+
+    :hover {
+        cursor: pointer;
+    }
+
+    &.priority-1 {
+        box-shadow:10px 0 0 forestgreen inset;
+    }
+
+    &.priority-2 {
+        box-shadow:10px 0 0 gold inset;
+    }
+
+    &.priority-3 {
+        box-shadow:10px 0 0 orangered inset;
+    }
+
+    .x-title-item {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin: 0 8px 5px 0;
+    }
+}

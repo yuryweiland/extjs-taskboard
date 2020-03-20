@@ -7,6 +7,7 @@ const lastNames = ['Иванов', 'Петров', 'Сидоров', 'Стэтх
 const taskTitles = ['Неисправность сервера', 'Новый дизайн сайта', 'Рефакторинг старого кода', 'Сделайте пожалуйста что-нибудь!'];
 const taskStatuses = ['PLAN', 'IN PROGRESS', 'TESTING', 'DONE'];
 const taskPriorities = ['MUST', 'SHOULD', 'COULD'];
+const taskPriorityColors = ['green', 'yellow', 'red'];
 
 /**
  * Возвращаем случайное число в промежутке от min до max
@@ -33,26 +34,24 @@ function generateRandomDate(start = new Date(0), end = new Date()) {
 
     const result = new Date(random(startDate.getTime(), endDate.getTime()));
 
-    return result.toISOString();
+    return result.toISOString().substr(0, 10);
 }
 
 /**
  * Генерация мок-данных для тестового задания
  */
 function generateTaskBoardData() {
-    const minItems = 5;
-    const maxItems = 15;
-
     let tasks = [];
 
-    for (let i = 0; i < random(minItems, maxItems); i++) {
+    for (let i = 0; i < 20; i++) {
         tasks[i] = {
-            id: 'TSK-' + ++i,
+            id: 'TSK-' + (i + 1),
             firstName: firstNames[random(0, firstNames.length - 1)],
             lastName: lastNames[random(0, lastNames.length - 1)],
             taskTitle: taskTitles[random(0, taskTitles.length - 1)],
             taskStatusId: random(1, 4),
             taskPriorityId: random(1, 3),
+            taskPriorityColor: taskPriorityColors[taskPriorities.indexOf(this.taskPriorityId) + 1],
             taskDate: generateRandomDate()
         };
     }
