@@ -22,9 +22,7 @@ Ext.define('TaskBoard.view.kanban.Kanban', {
         myStatus: '{statusData}'
     },
     setMyStatus: function (data) {
-
         console.log('data', data);
-
         this.fireEvent('onupdatekanbanstate', this, data);
     }
 

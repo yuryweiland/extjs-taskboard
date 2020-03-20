@@ -42,25 +42,27 @@ Ext.define('TaskBoard.view.kanban.KanbanController', {
                         return view.getEl();
                     },
                     onNodeDrop: function (target, dd, e, data) {
-                        let currentStateId = data.draggedRecord.get('taskStatusId'),
-                            sourceStateId = null;
+                        console.log('onNodeDrop', data.draggedRecord);
+                        
+                        const elementStatusId = Ext.getCmp(target.getAttribute('id')).lookupViewModel().get('statusId');
+                        let currentTaskStatusId = data.draggedRecord.get('taskStatusId');
+                        let changedTaskStatusId = elementStatusId ? elementStatusId : null;
 
-                        try {
-                            sourceStateId = Ext.getCmp(target.getAttribute('id'))
-                                .lookupViewModel()
-                                .get('taskStatusId');
-                        } catch (e) {
-                        }
+                        console.log('changedTaskStatusId', changedTaskStatusId);
+                            
+                        if (changedTaskStatusId !== null && currentTaskStatusId !== changedTaskStatusId) {
 
-                        if (sourceStateId !== null && currentStateId !== sourceStateId) {
-                            let stateData = Ext.StoreManager
-                                .get('statusStore')
-                                .getById(sourceStateId);
+                            let statusData = Ext.StoreManager
+                                .get('statusesStore')
+                                .getById(changedTaskStatusId);
 
-                            data.draggedRecord.set('taskStatusId', sourceStateId);
+                            // Устанавливаем новый taskStatusId для элемента
+                            data.draggedRecord.set('taskStatusId', changedTaskStatusId);
+
                             data.draggedRecord.set(
                                 'taskStatusId',
-                                Ext.copyTo({}, stateData.getData(), 'id,sort,name'));
+                                Ext.copyTo({}, statusData.getData(), 'id,title'));
+
                             data.draggedRecord.commit();
                         }
                     }
@@ -70,21 +72,15 @@ Ext.define('TaskBoard.view.kanban.KanbanController', {
     },
 
     'updateKanbanState': function (panel, data) {
-
-
         console.log(panel.items);
 
         for (var i = 0, l = Ext.max([data.length, panel.items.length]); i < l; i++) {
 
-
             console.log('updateKanbanState', panel.items.getAt(i), data[i]);
-
 
             if (panel.items.getAt(i) !== undefined && data[i] !== undefined) {
 
                 let vm = panel.items.getAt(i).getViewModel();
-
-                console.log('VM:', vm);
 
                 vm.set('title', data[i].get('title'));
                 vm.set('statusId', data[i].get('id'));
@@ -99,7 +95,7 @@ Ext.define('TaskBoard.view.kanban.KanbanController', {
                             statusId: data[i].get('id')
                         },
                         stores: {
-                            localTaskStore: {
+                            filteredTasksStore: {
                                 source: 'tasksStore',
                                 filters: {
                                     property: 'taskStatusId',
@@ -129,14 +125,9 @@ Ext.define('TaskBoard.view.kanban.KanbanController', {
                 });
 
             } else if (panel.items.getAt(i) !== undefined) {
-
                 panel.remove(panel.items.getAt(i), true);
-
             }
         }
     }
-
-
-
 
 });

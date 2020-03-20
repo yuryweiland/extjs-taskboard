@@ -23,7 +23,7 @@ Ext.define('TaskBoard.view.kanban.KanbanDataView', {
         tpl: new Ext.XTemplate(
             '<tpl for=".">',
             '<div style="padding-left:16px; box-shadow:10px 0 0 red inset;" class="task-item">',
-            '<h3>{id}: {taskName}</h3>',
+            '<h3>{id}: {taskTitle}</h3>',
             '<div class="x-title-text-default x-title-item">{firstName} {lastName}</div>',
             '</div>',
             '</tpl>'),
@@ -34,7 +34,7 @@ Ext.define('TaskBoard.view.kanban.KanbanDataView', {
             }),
         bind: {
             selection: '{selectedTask}',
-            store: '{tasksStore}'
+            store: '{filteredTasksStore}'
         }
     }
 

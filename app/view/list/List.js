@@ -15,12 +15,12 @@ Ext.define('TaskBoard.view.list.List', {
     },
 
     columns: [
-        { text: '№ тикета',  dataIndex: 'id'},
+        { text: 'Приоритет', dataIndex: 'taskPriorityId' },
+        { text: '№ тикета',  dataIndex: 'id', flex: 1},
         { text: 'Имя', dataIndex: 'firstName', flex: 1 },
         { text: 'Фамилия', dataIndex: 'lastName', flex: 1 },
         { text: 'Наименование задачи', dataIndex: 'taskTitle', flex: 1 },
         { text: 'Статус', dataIndex: 'taskStatusId', flex: 1 },
-        { text: 'Приоритет', dataIndex: 'taskPriorityId', flex: 1 },
         { text: 'Дата создания', dataIndex: 'taskDate', flex: 1 }
     ]
 });
