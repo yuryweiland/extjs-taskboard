@@ -60,6 +60,38 @@ Ext.define('TaskBoard.view.kanban.KanbanController', {
                         }
                     }
                 });
+            },
+            itemclick: function() {
+                const statusesStore = Ext.getStore('statusesStore');
+                const prioritiesStore = Ext.getStore('prioritiesStore');
+
+                /** Получаем selectedTask из ViewModel-и
+                 * (как альтернатива, вторым аргументом у itemclick также является
+                 * выбранный элемент, но в качестве эксперимента я взял данные
+                 * из MainViewModel
+                 */
+                const selectedTask = this.getView().up('app-main').getViewModel().get('selectedTask');
+
+                const selectedTaskStatus = statusesStore.getRange()
+                    .find((item) => selectedTask.get('taskStatusId') === item.get('id'))
+                    .get('title');
+
+                const selectedTaskPriority = prioritiesStore.getRange()
+                    .find((item) => selectedTask.get('taskPriorityId') === item.get('id'))
+                    .get('title');
+
+                const selectedTaskDate = new Date(selectedTask.get('taskDate')).toLocaleDateString('ru');
+
+                // Выводим всплывающее сообщение в нижней правой части экрана
+                // с информацией о выбранной задаче на доске
+                Ext.toast({
+                    html: '<h3 style="margin:0;">' + selectedTask.get('id') + ': ' + selectedTask.get('taskTitle')+ '</h3>' +
+                        '<br><strong>Исполнитель:</strong> ' + selectedTask.get('firstName') + ' ' + selectedTask.get('lastName') +
+                        '<br><strong>Статус:</strong> ' + selectedTaskStatus +
+                        '<br><strong>Важность:</strong> ' + selectedTaskPriority +
+                        '<br><strong>Дата создания задачи:</strong> ' + selectedTaskDate,
+                    align: 'br'
+                });
             }
         }
     },
@@ -101,10 +133,6 @@ Ext.define('TaskBoard.view.kanban.KanbanController', {
                                     },
                                     {
                                         property: 'lastName',
-                                        direction: 'ASC'
-                                    },
-                                    {
-                                        property: 'firstName',
                                         direction: 'ASC'
                                     }
                                 ]

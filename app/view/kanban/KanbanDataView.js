@@ -20,13 +20,18 @@ Ext.define('TaskBoard.view.kanban.KanbanDataView', {
         overItemCls: 'x-grid-item-over',
         selectedItemCls: 'x-grid-item-selected',
         scrollable: 'vertical',
+        style: {
+            overflow: 'auto'
+        },
         tpl: new Ext.XTemplate(
             '<tpl for=".">',
             '<div style="padding-left:16px;" class="task-item priority-{taskPriorityId}">',
             '<h3>{id}: {taskTitle}</h3>',
-            '<div class="x-title-text-default x-title-item"><div>{firstName} {lastName}</div><div>{taskDate}</div></div>',
+            '<div class="x-title-text-default x-title-item"><div>{lastName}</div>',
+            '<div>{[new Date(values.taskDate).toLocaleDateString("ru")]}</div></div>',
             '</div>',
-            '</tpl>'),
+            '</tpl>'
+        ),
         emptyText: new Ext.XTemplate(
             '<span>{text}</span>')
             .apply({

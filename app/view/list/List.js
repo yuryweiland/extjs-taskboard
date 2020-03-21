@@ -53,7 +53,10 @@ Ext.define('TaskBoard.view.list.List', {
         }, {
             text: 'Дата создания',
             dataIndex: 'taskDate',
-            flex: 1
+            flex: 1,
+            renderer: function(value) {
+                return new Date(value).toLocaleDateString("ru");
+            }
         }
     ]
 });
