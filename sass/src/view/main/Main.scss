@@ -118,3 +118,20 @@ div.task-item {
         margin: 0 8px 5px 0;
     }
 }
+
+.tasks-list {
+  .row-priority-1 {
+    background: forestgreen;
+    color: #fff;
+  }
+
+  .row-priority-2 {
+    background: gold;
+    color: #fff;
+  }
+
+  .row-priority-3 {
+    background: orangered;
+    color: #fff;
+  }
+}

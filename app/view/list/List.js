@@ -2,6 +2,8 @@ Ext.define('TaskBoard.view.list.List', {
     extend: 'Ext.grid.Panel',
     xtype: 'list',
 
+    cls: 'tasks-list',
+
     requires: [
         'TaskBoard.view.list.ListController'
     ],
@@ -27,15 +29,15 @@ Ext.define('TaskBoard.view.list.List', {
         }, {
             text: '№ тикета',
             dataIndex: 'id',
-            flex: 1
+            width: 80,
         }, {
             text: 'Имя',
             dataIndex: 'firstName',
-            flex: 1
+            flex: 0.5
         }, {
             text: 'Фамилия',
             dataIndex: 'lastName',
-            flex: 1
+            flex: 0.5
         }, {
             text: 'Наименование задачи',
             dataIndex: 'taskTitle',
@@ -43,7 +45,7 @@ Ext.define('TaskBoard.view.list.List', {
         }, {
             text: 'Статус',
             dataIndex: 'taskStatusId',
-            flex: 1,
+            width: 100,
             renderer: function(value) {
                 const store = Ext.getStore('statusesStore');
                 return store.getRange()
@@ -53,10 +55,16 @@ Ext.define('TaskBoard.view.list.List', {
         }, {
             text: 'Дата создания',
             dataIndex: 'taskDate',
-            flex: 1,
+            width: 140,
             renderer: function(value) {
                 return new Date(value).toLocaleDateString("ru");
             }
         }
-    ]
+    ],
+    viewConfig: {
+        getRowClass: function(record) {
+            const taskPriorityId = record.get('taskPriorityId');
+            return 'row-priority-' + taskPriorityId;
+        }
+    },
 });
