@@ -49,21 +49,7 @@ Ext.define('TaskBoard.view.main.Main', {
     },
 
     defaults: {
-        bodyPadding: 0,
-        tabConfig: {
-            plugins: 'responsive',
-            responsiveConfig: {
-                wide: {
-                    iconAlign: 'left',
-                    textAlign: 'left'
-                },
-                tall: {
-                    iconAlign: 'top',
-                    textAlign: 'center',
-                    width: 120
-                }
-            }
-        }
+        bodyPadding: '0 0 0 6px'
     },
 
     items: [{

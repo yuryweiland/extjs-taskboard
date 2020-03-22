@@ -9,6 +9,7 @@ Ext.define('TaskBoard.view.kanban.KanbanDataView', {
     border: true,
     minWidth: 300,
     layout: 'fit',
+    scrollable: 'vertical',
 
     viewModel: 'main',
 
@@ -19,7 +20,6 @@ Ext.define('TaskBoard.view.kanban.KanbanDataView', {
         itemSelector: 'div.task-item',
         overItemCls: 'x-grid-item-over',
         selectedItemCls: 'x-grid-item-selected',
-        scrollable: 'vertical',
         style: {
             overflow: 'auto'
         },

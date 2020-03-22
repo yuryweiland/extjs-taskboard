@@ -18,14 +18,16 @@ Ext.define('TaskBoard.view.list.List', {
 
     columns: [
         {
-            text: 'Приоритет',
+            text: 'Важность',
             dataIndex: 'taskPriorityId',
+            width: 110,
+            align: 'center',
             renderer: function(value) {
                 const store = Ext.getStore('prioritiesStore');
                 return store.getRange()
                     .find((item) => item.get('id') === value)
                     .get('title');
-            }
+            },
         }, {
             text: '№ тикета',
             dataIndex: 'id',
@@ -55,7 +57,7 @@ Ext.define('TaskBoard.view.list.List', {
         }, {
             text: 'Дата создания',
             dataIndex: 'taskDate',
-            width: 140,
+            width: 120,
             renderer: function(value) {
                 return new Date(value).toLocaleDateString("ru");
             }

@@ -6,7 +6,10 @@ Ext.define('TaskBoard.view.kanban.Kanban', {
         'TaskBoard.view.kanban.KanbanController',
     ],
 
-    title: 'Доска Kanban',
+    header: {
+        title: 'Доска Kanban',
+        cls: 'kanban-panel-header',
+    },
 
     controller: 'kanban-controller',
 

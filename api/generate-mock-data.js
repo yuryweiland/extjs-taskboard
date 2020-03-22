@@ -6,7 +6,7 @@ const firstNames = ['Иван', 'Герман', 'Михаил', 'Сергей', 
 const lastNames = ['Иванов', 'Петров', 'Сидоров', 'Стэтхем', 'Харди'];
 const taskTitles = ['Неисправность сервера', 'Новый дизайн сайта', 'Рефакторинг старого кода', 'Сделайте пожалуйста что-нибудь!'];
 const taskStatuses = ['PLAN', 'IN PROGRESS', 'TESTING', 'DONE'];
-const taskPriorities = ['MUST', 'SHOULD', 'COULD'];
+const taskPriorities = ['COULD', 'SHOULD', 'MUST'];
 const taskPriorityColors = ['green', 'yellow', 'red'];
 
 /**
@@ -70,9 +70,11 @@ function transformStringsToObjectsArray(stringArray) {
     )
 }
 
-console.log('TASKS:');
-console.log(generateTaskBoardData());
-console.log('STATUSES:');
-console.log(transformStringsToObjectsArray(taskStatuses));
-console.log('PRIORITIES:');
-console.log(transformStringsToObjectsArray(taskPriorities));
+console.log('MOCK-DATA:\n' +
+    '\n' +
+    '{success: true,\n' +
+        'tasks: ', generateTaskBoardData(), ',\n' +
+        'statuses:', transformStringsToObjectsArray(taskStatuses), ',\n' +
+        'priorities: ', transformStringsToObjectsArray(taskPriorities), ',\n' +
+    '}'
+);
